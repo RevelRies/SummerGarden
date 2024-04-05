@@ -31,7 +31,7 @@ class Object(models.Model):
 class ObjectImage(models.Model):
     image = models.ImageField(upload_to='objects_images', verbose_name='Изображение объекта')
     image_base64 = models.TextField(blank=True, verbose_name='base64 кодировка фотографии')
-    object = models.ForeignKey(to=Object, on_delete=models.CASCADE, verbose_name='Объект')
+    object = models.ForeignKey(to=Object, on_delete=models.CASCADE, verbose_name='Объект', related_name='images')
 
     class Meta:
         verbose_name = 'Изображение объекта'
@@ -56,7 +56,7 @@ class Question(models.Model):
     text = models.TextField(max_length=100, verbose_name='Текст вопроса')
     image = models.ImageField(upload_to='questions_images', verbose_name='Изображение вопроса')
     image_base64 = models.TextField(blank=True, verbose_name='base64 кодировка фотографии')
-    quiz = models.ForeignKey(to=Quiz, on_delete=models.CASCADE, verbose_name='Викторина')
+    quiz = models.ForeignKey(to=Quiz, on_delete=models.CASCADE, verbose_name='Викторина', related_name='questions')
 
     class Meta:
         verbose_name = 'Вопрос'
@@ -69,7 +69,7 @@ class Question(models.Model):
 class Answer(models.Model):
     text = models.TextField(max_length=300, verbose_name='Текст ответа')
     right = models.BooleanField(verbose_name='Правильный ответ')
-    question = models.ForeignKey(to=Question, on_delete=models.CASCADE, verbose_name='Вопрос')
+    question = models.ForeignKey(to=Question, on_delete=models.CASCADE, verbose_name='Вопрос', related_name='answers')
 
     class Meta:
         verbose_name = 'Ответ'
