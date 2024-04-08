@@ -1,7 +1,7 @@
 import graphene
 
 from graphene_django.types import DjangoObjectType
-from graphene_django.filter import DjangoFilterConnectionField
+# from graphene_django.filter import DjangoFilterConnectionField
 from graphene_django.types import ObjectType as GraphQLObjectType
 from django.contrib.postgres.search import TrigramSimilarity
 
