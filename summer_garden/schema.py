@@ -1,6 +1,7 @@
 import graphene
 
 from graphene_django.types import DjangoObjectType
+from graphene_django.filter import DjangoFilterConnectionField
 from graphene_django.types import ObjectType as GraphQLObjectType
 from django.contrib.postgres.search import TrigramSimilarity
 
@@ -43,6 +44,7 @@ class AnswerGraphQLType(DjangoObjectType):
 
 # GraphQL запросы
 class Query(GraphQLObjectType):
+    # запросы и данные которые нужно в них передать
     object = graphene.Field(ObjectGraphQLType, id=graphene.Int())
     objects = graphene.List(ObjectGraphQLType)
     objects_by_type = graphene.List(ObjectGraphQLType, type_id=graphene.Int())
@@ -52,6 +54,7 @@ class Query(GraphQLObjectType):
     quizzes = graphene.List(QuizGraphQLType)
     question = graphene.Field(QuestionGraphQLType, question_id=graphene.Int())
 
+    # функции которые будут отрабатывать при обращении к запросам (выше)
     def resolve_object(self, info, **kwargs):
         id = kwargs.get('id')
 
