@@ -37,6 +37,7 @@ INSTALLED_APPS = [
 
     'graphene_django',
     'nested_admin',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
