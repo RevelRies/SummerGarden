@@ -104,8 +104,6 @@ class Query(GraphQLObjectType):
     # запросы и данные которые нужно в них передать
     object = graphene.Field(ObjectGraphQLType, pk=graphene.Int())
     objects = OrderedDjangoFilterConnectionField(ObjectGraphQLType, orderBy=graphene.List(of_type=graphene.String))
-    objects_by_type = graphene.List(ObjectGraphQLType, type_pk=graphene.Int())
-    objects_by_name = graphene.List(ObjectGraphQLType, object_name=graphene.String())
     object_types = OrderedDjangoFilterConnectionField(ObjectTypeGraphQLType, orderBy=graphene.List(of_type=graphene.String))
     quiz = graphene.Field(QuizGraphQLType, quiz_pk=graphene.Int())
     quizzes = graphene.List(QuizGraphQLType)
@@ -121,21 +119,6 @@ class Query(GraphQLObjectType):
 
     def resolve_objects(self, info, **kwargs):
         return Object.objects.all()
-
-    def resolve_objects_by_type(self, info, **kwargs):
-        type_id = kwargs.get('type_pk')
-
-        if type_id:
-            return Object.objects.filter(type=type_id)
-        return None
-
-    def resolve_objects_by_name(self, info, **kwargs):
-        object_name = kwargs.get('object_name')
-
-        if object_name:
-            return (Object.objects.annotate(similarity=TrigramSimilarity('name', object_name),)
-                    .filter(similarity__gt=0.1).order_by('-similarity'))
-        return None
 
     def resolve_object_types(self, info, **kwargs):
         return ObjectType.objects.all()

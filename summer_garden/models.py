@@ -16,8 +16,8 @@ class Object(models.Model):
     name = models.CharField(max_length=250, verbose_name='Название')
     author = models.CharField(max_length=250, verbose_name='Автор')
     info = models.TextField(max_length=1000, verbose_name='Описание')
-    longitude = models.CharField(max_length=100, verbose_name='Широта')
-    latitude = models.CharField(max_length=100, verbose_name='Долгота')
+    latitude = models.CharField(max_length=100, verbose_name='Широта')
+    longitude = models.CharField(max_length=100, verbose_name='Долгота')
     type = models.ForeignKey(to=ObjectType, on_delete=models.CASCADE, verbose_name='Тип')
 
     class Meta:
