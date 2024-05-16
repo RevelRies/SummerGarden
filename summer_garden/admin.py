@@ -76,9 +76,13 @@ class QuestionInline(nested_admin.NestedStackedInline):
     extra = 1
     exclude = ['image_base64']
     inlines = [AnswerInline]
+    readonly_fields = ['preview']
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 3, 'cols': 90})},
     }
+
+    def preview(self, obj):
+        return mark_safe(f'<img src="{obj.image.url}" style="max-height: 200px;">')
 
 
 @admin.register(Quiz)
