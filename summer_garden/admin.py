@@ -54,6 +54,7 @@ class ObjectImagesInline(admin.StackedInline):
 @admin.register(Object)
 class ObjectAdmin(admin.ModelAdmin):
     inlines = [ObjectImagesInline]
+    exclude = ['latitude_conv', 'longitude_conv']
 
 
 # Тип объекта
