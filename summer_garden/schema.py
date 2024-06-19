@@ -103,7 +103,7 @@ class AnswerGraphQLType(DjangoObjectType):
 class Query(GraphQLObjectType):
     # запросы и данные которые нужно в них передать
     object = graphene.Field(ObjectGraphQLType, pk=graphene.Int())
-    objects = OrderedDjangoFilterConnectionField(ObjectGraphQLType, orderBy=graphene.List(of_type=graphene.String))
+    objects = OrderedDjangoFilterConnectionField(ObjectGraphQLType, orderBy=graphene.List(of_type=graphene.String), max_limit=None)
     object_types = OrderedDjangoFilterConnectionField(ObjectTypeGraphQLType, orderBy=graphene.List(of_type=graphene.String))
     quiz = graphene.Field(QuizGraphQLType, quiz_pk=graphene.Int())
     quizzes = graphene.List(QuizGraphQLType)
