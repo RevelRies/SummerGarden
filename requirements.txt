@@ -40,7 +40,12 @@ psycopg2-binary==2.9.9
 pycparser==2.22
 python-dotenv==1.0.1
 python-monkey-business==1.0.0
+
+# версия для windows
 pywin32==306
+# версия для Linux
+#pywin32;sys_platform == 'win32'
+
 pyzmq==26.0.3
 requests==2.32.3
 six==1.16.0
